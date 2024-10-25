@@ -228,8 +228,25 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+  let newStr = '';
+
+  str.split('').forEach((el) => {
+    const indexLetterInArr = alphabet.indexOf(el);
+    if (indexLetterInArr === -1) {
+      newStr += el;
+    } else if (indexLetterInArr < 13
+      || (indexLetterInArr >= 26 && indexLetterInArr < 39)) {
+      newStr += alphabet[indexLetterInArr + 13];
+    } else if ((indexLetterInArr >= 13 && indexLetterInArr < 26)
+      || (indexLetterInArr >= 39 && indexLetterInArr < 52)) {
+      newStr += alphabet[indexLetterInArr - 13];
+    }
+  });
+  return newStr;
 }
 
 /**
